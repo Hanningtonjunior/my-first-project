@@ -1,0 +1,28 @@
+name: My First Automated Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Say Hello
+      run: echo "🎉 Hello from GitHub Actions! Your push to ${{ github.ref }} was successful!"
+    
+    - name: Show Repository Info
+      run: |
+        echo "Repository: ${{ github.repository }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Triggered by: ${{ github.actor }}"
+    
+    - name: List Files
+      run: ls -la
